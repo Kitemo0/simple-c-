@@ -1,0 +1,107 @@
+#include <iostream>
+#include <vector>
+#include <windows.h>
+
+using namespace std;
+
+struct Pracownik {
+
+    string imie;
+    string nazwisko;
+    int wiek;
+
+};
+
+vector<Pracownik> listaPracownikow;
+
+void dodajPracownika()
+{
+    Pracownik pracownik;
+    cout << "Podaj imie pracownika:";
+    cin >> pracownik.imie;
+
+    cout << "Podaj nazwisko pracownika:";
+    cin >> pracownik.nazwisko;
+
+    cout << "Podaj wiek pracownika:";
+    cin >> pracownik.wiek;
+
+    listaPracownikow.push_back(pracownik);
+
+    cout << "Pracownik pomyslnie dodany!" << endl;
+    Sleep(3000);
+}
+
+void usunPracownika()
+{
+    if (listaPracownikow.empty())
+    {
+        cout << "W bazie danych nie ma zadnych pracownikow. Prosze o dodanie ich!" << endl;
+        return;
+    }
+    else
+    {
+        cout << "wybierz numer pracownika z listy ktorego chcesz usunac:" << endl;
+        for (int i = 0; i < listaPracownikow.size(); i++)
+        {
+            cout << i + 1 << ". " << listaPracownikow[i].imie << " " << listaPracownikow[i].nazwisko << endl;
+        }
+
+        int numer;
+        cin >> numer;
+
+        if (numer < 1 || numer > listaPracownikow.size())
+        {
+            cout << "Podano niepoprawny numer. Prosze sprobowac ponownie" << endl;
+            return;
+        }
+
+        listaPracownikow.erase(listaPracownikow.begin() + numer - 1);
+        cout << "Pracownik zostal pomyslnie usuniety!" << endl;
+        Sleep(3000);
+    }
+}
+
+void wyswietlPracownikow()
+{
+    if (listaPracownikow.empty())
+    {
+        cout << "Lista pracownikow jest pusta!" << endl;
+    }
+
+    cout << "Lista pracownikow: " << endl;
+    for (int i = 0; i < listaPracownikow.size(); i++)
+    {
+        cout << i + 1 << ". " << listaPracownikow[i].imie << " " << listaPracownikow[i].nazwisko << "(" << "wiek: " << listaPracownikow[i].wiek << ")" << endl;
+    }
+    cout << "Za 10sek lista się zamknie";
+    Sleep(10000);
+}
+
+int main()
+{
+
+    while (true)
+    {
+        system("cls");
+
+        cout << "1. Dodaj pracownika" << endl;
+        cout << "2. Usun pracownika" << endl;
+        cout << "3. Wyswietl pracownika" << endl;
+        cout << "4. Wyjdz" << endl;
+        cout << "Wybierz:";
+        int wybor;
+        cin >> wybor;
+
+        switch (wybor)
+        {
+        case 1: dodajPracownika(); break;
+        case 2: usunPracownika(); break;
+        case 3: wyswietlPracownikow(); break;
+        case 4: return 0;
+        }
+    }
+
+
+    return 0;
+}
