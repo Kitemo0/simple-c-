@@ -1,0 +1,78 @@
+#include <iostream>
+
+using namespace std;
+int n;
+
+float arithmetic(float *tab,int numb)
+{
+
+    float sum=0;
+    for(int i=0;i<numb;i++)
+   {
+        sum+=*tab;
+        tab++;
+    }
+    return sum/numb;
+
+}
+
+int main()
+{
+    cout << "Enter number of array: ";
+    cin >> n;
+    float num,m,tab[n];
+
+    for(int i=0;i<n;i++)
+    {
+        cout <<  "Enter " << i << ". number: ";
+        cin >> num;
+        tab[i] = num;
+    }
+
+     float arith = arithmetic(tab,n);
+
+    float close = tab[0];
+    float close2 = tab[0];
+    float aclose2 = arith-close2;
+    float aclose = arith-close;
+
+    for(int i=0;i<n;i++)
+    {
+        float atab = arith - tab[i];
+        m = arith - tab[0];
+
+
+        if((atab<=m) && (atab >=0) && ((aclose)!=(atab)))
+        {
+
+                m = atab;
+                    close = tab[i];
+
+        }
+        else
+        {
+            if(close2 > 0)
+            //if((
+                  cout << "Nr. " << i << " " << aclose << " and " << (aclose2)*-1 << endl;
+                  if((arith-close) != ((arith-close2)*-1))
+            close2 = tab[i];
+        }
+
+    }
+
+    if(aclose2 < 0) aclose2*=-1;
+    if(aclose < 0) aclose*=-1;
+
+
+    cout << "difference: " << aclose << " and " << aclose2 << endl;
+
+    if((aclose) == (aclose2) && (close!=close2))
+    {
+        cout << "Number closest to the arithmetic mean is: " << close << " and " << close2 << endl;
+    }
+    else
+    cout << "Number closest to the arithmetic mean is: " << close << endl;
+    cout << "Arithmetic mean: " << arith;
+
+    return 0;
+}
