@@ -1,0 +1,63 @@
+#include <iostream>
+
+using namespace std;
+
+float average_grade(float sum, float weight_count)
+{
+    return  sum / weight_count;
+
+}
+
+void gra(float* grades, string* name, int quantity_s)
+{
+    for (int i = 0; i < quantity_s; i++)
+    {
+        cout << *name << ": " << *grades << endl;
+        name++;
+        grades++;
+    }
+}
+
+int main()
+{
+    int quantity_s, quantity;
+    int grade;
+    float weight, sum = 0, weight_count = 0;
+    cout << "Enter quantity of subjects: ";
+    cin >> quantity_s;
+
+    string* name = new string[quantity_s];
+    float* grades = new float[quantity_s];
+
+    for (int i = 0; i < quantity_s; i++)
+    {
+        cout << "Enter name of subject: ";
+        cin >> name[i];
+        cout << "Enter quantity of grades for this subject: ";
+        cin >> quantity;
+        for (int j = 0; j < quantity; j++)
+        {
+            cout << "Enter grade: ";
+            cin >> grade;
+            cout << "Weight of grade: ";
+            cin >> weight;
+            weight_count += weight;
+            sum += grade * weight;
+            cout << "Grade: " << sum << endl;
+            cout << "SUM WAGA: " << weight_count << endl;
+        }
+
+        grades[i] = average_grade(sum, weight_count);
+        sum = 0;
+        weight_count = 0;
+
+    }
+
+    gra(grades, name, quantity_s);
+
+
+    delete[] grades;
+    delete[] name;
+
+    return 0;
+}
